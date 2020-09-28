@@ -1,12 +1,10 @@
 package br.com.digitalhouse.desafio
 
-import java.util.*
+import java.time.LocalDate
 
 class Matricula(
     val aluno: Aluno,
     val curso: Curso) {
 
-    init {
-        var matricula = Date()
-    }
+        val matricula = LocalDate.now()
 }
