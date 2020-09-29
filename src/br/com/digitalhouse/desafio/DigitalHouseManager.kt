@@ -1,11 +1,10 @@
 package br.com.digitalhouse.desafio
 
-class DigitalHouseManager{
-
-    val listaDeAlunos = mutableListOf<Aluno>()
-    val listaDeProfessores = mutableListOf<Professor>()
-    val listaDeCursos = mutableListOf<Curso>()
-    val listaDeMatriculas = mutableListOf<Matricula>()
+class DigitalHouseManager {
+    private val listaDeAlunos = mutableListOf<Aluno>()
+    private val listaDeProfessores = mutableListOf<Professor>()
+    private val listaDeCursos = mutableListOf<Curso>()
+    private val listaDeMatriculas = mutableListOf<Matricula>()
 
     fun registrarCurso(nome: String, codigoCurso: Int, quantidadeMaximaDeAlunos: Int) {
         if (listaDeCursos.find {it.codigoCurso == codigoCurso} != null) {
@@ -77,8 +76,10 @@ class DigitalHouseManager{
             println("Não há vagas disponíves no curso $codigoCurso")
             return
         }
-        if (curso.adicionarUmAluno(aluno))
+        if (curso.adicionarUmAluno(aluno)) {
+            listaDeMatriculas.add(Matricula(aluno, curso))
             println("Matrícula do aluno $codigoAluno no curso $codigoCurso efetuada com sucesso")
+        }
         else
             println("Aluno $codigoAluno já está matriculado no no curso $codigoCurso")
     }
@@ -104,5 +105,21 @@ class DigitalHouseManager{
         curso.professorTitular = professorTitular as ProfessorTitular
         curso.professorAdjunto = professorAdjunto as ProfessorAdjunto
         println("Professores $codigoProfessorTitular e $codigoProfessorAdjunto alocados ao curso $codigoCurso")
+    }
+
+    fun consultarMatriculasAluno (codigoAluno: Int) {
+        if (listaDeAlunos.find {it.codigoAluno == codigoAluno} == null) {
+            println("Aluno $codigoAluno não existe")
+            return
+        }
+        val matriculas = listaDeMatriculas.filter {it.aluno.codigoAluno == codigoAluno}
+        if (matriculas.isNullOrEmpty()) {
+            println("Aluno $codigoAluno não está matriculado em nenhum curso")
+            return
+        }
+        println("Aluno $codigoAluno está matriculado no(s) seguinte(s) curso(s): ")
+        for (elemento in matriculas) {
+            println("\tCurso ${elemento.curso.codigoCurso} (efetivado em ${elemento.data})")
+        }
     }
 }

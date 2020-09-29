@@ -1,9 +1,9 @@
 package br.com.digitalhouse.desafio
 
-data class ProfessorTitular (
-    override val codigoProfessor: Int,
-    override val nome: String,
-    override val sobrenome: String,
-    override val tempoDeCasa: Int,
-    val especialidade: String): Professor {
+class ProfessorTitular (
+    codigoProfessor: Int,
+    nome: String,
+    sobrenome: String,
+    tempoDeCasa: Int,
+    especialidade: String): Professor (codigoProfessor, nome, sobrenome, tempoDeCasa){
 }

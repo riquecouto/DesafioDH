@@ -14,16 +14,15 @@ data class Curso(
     }
 
     fun adicionarUmAluno(umAluno: Aluno): Boolean {
-        if (!listaDeAlunos.contains(umAluno) &&
-            listaDeAlunos.size < quantidadeMaximaDeAlunos) {
-                listaDeAlunos.add(umAluno)
-                return true
+        if (!listaDeAlunos.contains(umAluno) && listaDeAlunos.size < quantidadeMaximaDeAlunos) {
+            listaDeAlunos.add(umAluno)
+            return true
         }
         return false
     }
 
     fun excluirAluno(umAluno: Aluno) {
         if (listaDeAlunos.contains(umAluno))
-            listaDeAlunos.add(umAluno)
+            listaDeAlunos.remove(umAluno)
     }
 }
