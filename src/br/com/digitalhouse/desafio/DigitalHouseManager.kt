@@ -44,11 +44,20 @@ class DigitalHouseManager{
     }
 
     fun excluirProfessor(codigoProfessor: Int) {
-        val professor = Curso(codigoProfessor, "", 0)
-        if (!listaDeCursos.contains(professor)) {
+        if (listaDeProfessores.find {it.codigoProfessor == codigoProfessor} == null) {
             println("Professor não existe")
             return
         }
-        listaDeCursos.remove(professor)
+        listaDeProfessores.removeAll {it.codigoProfessor == codigoProfessor}
+        println("Professor excluído")
+    }
+
+    fun matricularAluno(nome: String, sobrenome: String, codigoAluno:Int) {
+        val novoAluno = Aluno(codigoAluno, nome, sobrenome)
+        if (listaDeAlunos.contains(novoAluno)) {
+            println("Aluno já existe")
+            return
+        }
+        listaDeAlunos.add(novoAluno)
     }
 }
